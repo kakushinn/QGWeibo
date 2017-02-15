@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">QGWeibo</string>
+    <!-- 登录页面-->
+    <string name="activity_login_close">关闭</string>
+    <string name="activity_login_registe">注册</string>
+    <string name="activity_login_account_hint">手机号或邮箱</string>
+    <string name="activity_login_password_hint">密码</string>
+    <string name="activity_login_login_button">登录</string>
+</resources>
