@@ -1,9 +1,20 @@
 <resources>
-    <string name="app_name">QGWeibo</string>
-    <!-- 登录页面-->
-    <string name="activity_login_close">关闭</string>
-    <string name="activity_login_registe">注册</string>
-    <string name="activity_login_account_hint">手机号或邮箱</string>
-    <string name="activity_login_password_hint">密码</string>
-    <string name="activity_login_login_button">登录</string>
+    <string name="app_name">AppStore</string>
+    <!-- 导航栏-->
+    <string name="navigation_top">头条</string>
+    <string name="navigation_shehui">社会</string>
+    <string name="navigation_guonei">国内</string>
+    <string name="navigation_guoji">国际</string>
+    <string name="navigation_yule">娱乐</string>
+    <string name="navigation_tiyu">体育</string>
+    <string name="navigation_junshi">军事</string>
+    <string name="navigation_keji">科技</string>
+    <string name="navigation_caijing">财经</string>
+    <string name="navigation_shishang">时尚</string>
+
+    <!-- 底部菜单-->
+    <string name="bottom_menu_index">首页</string>
+    <string name="bottom_menu_video">视频</string>
+    <string name="bottom_menu_star">星座</string>
+    <string name="bottom_menu_movie">电影</string>
 </resources>

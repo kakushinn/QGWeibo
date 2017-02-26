@@ -6,4 +6,7 @@
     <color name="commonWhite">#FFFFFF</color>
     <color name="commonOrangeUnPressed">#FF4500</color>
     <color name="commonOrangePressed">#E9967A</color>
+    <color name="colorGray">#EEEEEE</color>
+    <color name="colorRed">#FF0000</color>
+    <color name="colorBlack">#000000</color>
 </resources>
