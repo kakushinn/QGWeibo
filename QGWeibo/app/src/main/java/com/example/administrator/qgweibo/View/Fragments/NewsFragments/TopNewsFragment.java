@@ -34,7 +34,7 @@ public class TopNewsFragment extends Fragment {
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private ListView listView;
-    private TextView tv;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +44,8 @@ public class TopNewsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.news_listview,null);
-//        swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipeRefreshLayout);
-//        listView = (ListView)view.findViewById(R.id.newsListView);
-        tv = (TextView)view.findViewById(R.id.testTv);
+        swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipeRefreshLayout);
+        listView = (ListView)view.findViewById(R.id.newsListView);
         OkHttpClient mOkHttpClient = new OkHttpClient();
         Request request = new Request.Builder().url("http://v.juhe.cn/toutiao/index?type=top&key=b69cc2e92edc5b582eba0a94c51173c8").build();
         Call call = mOkHttpClient.newCall(request);
@@ -64,12 +63,8 @@ public class TopNewsFragment extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-//                        NewsListAdapter adapter = new NewsListAdapter(getContext(),newsJson.getResult().getData());
-                        Toast.makeText(getContext(),newsJson.getResult().getData().get(0).getTitle(),Toast.LENGTH_SHORT).show();
-//                        listView.setAdapter(adapter);
-//                        TextView tv = new TextView(getContext());
-                        tv.setTextColor(Color.parseColor("#ff0000"));
-                        tv.setText(newsJson.getResult().getData().get(0).getTitle());
+                        NewsListAdapter adapter = new NewsListAdapter(getContext(),newsJson.getResult().getData());
+                        listView.setAdapter(adapter);
                     }
                 });
             }

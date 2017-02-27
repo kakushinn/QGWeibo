@@ -80,7 +80,7 @@ public class HomeActivity extends BaseActivity{
     }
 
     /**
-     * ‰n‰»Layout
+     * åˆå§‹åŒ–Layout
      */
     private void initLayout(){
         frameLayout = (FrameLayout)findViewById(R.id.frameLayout);
@@ -92,7 +92,7 @@ public class HomeActivity extends BaseActivity{
     }
 
     /**
-     * ‰n‰»fragment“I?¦
+     * åˆå§‹åŒ–fragmentçš„?ç¤º
      */
     private void initFragments(){
         fragments.clear();
@@ -111,8 +111,8 @@ public class HomeActivity extends BaseActivity{
 
 
     /**
-     * ?’u?¦“Ifragment
-     * @param mIndex  fragmentŠİfragmentList’†“IˆÊ’u
+     * ?ç½®?ç¤ºçš„fragment
+     * @param mIndex  fragmentæ‰€åœ¨fragmentListä¸­çš„ä½ç½®
      */
     private void setSelectedIndex(int mIndex){
         if(mIndex ==  currentIndex){
