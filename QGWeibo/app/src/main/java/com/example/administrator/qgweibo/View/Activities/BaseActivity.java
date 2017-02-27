@@ -3,6 +3,7 @@ package com.example.administrator.qgweibo.View.Activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -12,7 +13,7 @@ import com.example.administrator.qgweibo.Service.NetworkStateService;
 /**
  * Created by Administrator on 2017/2/26.
  */
-public class BaseActivity extends AppCompatActivity implements NetworkStateService.DoWhenDisconnected {
+public class BaseActivity extends FragmentActivity implements NetworkStateService.DoWhenDisconnected {
     public static NetworkStateService.DoWhenDisconnected  event;
 
     @Override

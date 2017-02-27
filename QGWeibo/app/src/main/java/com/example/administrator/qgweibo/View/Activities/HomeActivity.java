@@ -41,7 +41,6 @@ public class HomeActivity extends BaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         homeToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(homeToolbar);
         initLayout();
         initFragments();
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -78,7 +77,6 @@ public class HomeActivity extends BaseActivity{
 //        });
 //        int a = scrollHorizontal.getMeasuredWidth();
 //        int b = scrollHorizontal.getMeasuredHeight();
-
     }
 
     /**
