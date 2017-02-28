@@ -11,6 +11,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import com.example.administrator.qgweibo.View.Activities.BaseActivity;
+import com.example.administrator.qgweibo.View.Fragments.NewsFragments.TopNewsFragment;
 
 /**
  * Created by Administrator on 2017/2/26.
@@ -24,12 +25,15 @@ public class NetworkStateService extends Service {
     private BroadcastReceiver networkStateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            DoWhenDisconnected event = BaseActivity.event;
             if(ConnectivityManager.CONNECTIVITY_ACTION.equals(intent.getAction())){
                 ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
                 if(networkInfo == null || !networkInfo.isConnected()){
+                    DoWhenDisconnected event = BaseActivity.event;
                     event.doChange(false);
+                }else{
+                    DoWhenDisconnected event = TopNewsFragment.event;
+                    event.doChange(true);
                 }
             }
         }

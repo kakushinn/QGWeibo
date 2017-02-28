@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.administrator.qgweibo.Adapter.NewsListAdapter;
 import com.example.administrator.qgweibo.Model.Entities.NewsJson;
 import com.example.administrator.qgweibo.R;
+import com.example.administrator.qgweibo.Service.NetworkStateService;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -30,22 +31,29 @@ import okhttp3.Response;
 /**
  * Created by guochen on 2017/02/27.
  */
-public class TopNewsFragment extends Fragment {
-
+public class TopNewsFragment extends Fragment implements NetworkStateService.DoWhenDisconnected {
+    public static NetworkStateService.DoWhenDisconnected event;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ListView listView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        event = this;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.news_listview,null);
+        View view = inflater.inflate(R.layout.news_listview, null);
         swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipeRefreshLayout);
         listView = (ListView)view.findViewById(R.id.newsListView);
+        getDataFromApi();
+        return view;
+    }
+
+    private void getDataFromApi()
+    {
         OkHttpClient mOkHttpClient = new OkHttpClient();
         Request request = new Request.Builder().url("http://v.juhe.cn/toutiao/index?type=top&key=b69cc2e92edc5b582eba0a94c51173c8").build();
         Call call = mOkHttpClient.newCall(request);
@@ -68,8 +76,13 @@ public class TopNewsFragment extends Fragment {
                     }
                 });
             }
-
         });
-        return view;
+    }
+
+    @Override
+    public void doChange(boolean networkValid) {
+        if(networkValid){
+            getDataFromApi();
+        }
     }
 }

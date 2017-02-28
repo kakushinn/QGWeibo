@@ -53,7 +53,7 @@ public class NewsListAdapter extends BaseAdapter {
         holder.news_title_view.setText(mNewsList.get(position).getTitle());
         holder.news_from_view.setText(mNewsList.get(position).getAuthor_name());
         holder.news_date_view.setText(mNewsList.get(position).getDate());
-        Picasso.with(mContext).load(mNewsList.get(position).getThumbnail_pic_s()).into(holder.news_image_view);
+        Picasso.with(mContext).load(mNewsList.get(position).getThumbnail_pic_s()).placeholder(R.mipmap.loading).error(R.mipmap.load_error).into(holder.news_image_view);
         return convertView;
     }
 
