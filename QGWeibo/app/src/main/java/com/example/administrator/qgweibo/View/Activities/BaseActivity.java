@@ -13,7 +13,7 @@ import com.example.administrator.qgweibo.Service.NetworkStateService;
 /**
  * Created by Administrator on 2017/2/26.
  */
-public class BaseActivity extends FragmentActivity implements NetworkStateService.DoWhenDisconnected {
+public class BaseActivity extends AppCompatActivity implements NetworkStateService.DoWhenDisconnected {
     public static NetworkStateService.DoWhenDisconnected  event;
 
     @Override

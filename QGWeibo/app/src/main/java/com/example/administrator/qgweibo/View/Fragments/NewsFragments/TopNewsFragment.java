@@ -14,9 +14,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.qgweibo.Adapter.NewsListAdapter;
+import com.example.administrator.qgweibo.Const.Consts;
+import com.example.administrator.qgweibo.Model.Entities.News;
 import com.example.administrator.qgweibo.Model.Entities.NewsJson;
+import com.example.administrator.qgweibo.Model.Interfaces.INewsService;
+import com.example.administrator.qgweibo.Model.NetWorkServices.NewsService;
+import com.example.administrator.qgweibo.Presents.TopNewsPresent;
 import com.example.administrator.qgweibo.R;
 import com.example.administrator.qgweibo.Service.NetworkStateService;
+import com.example.administrator.qgweibo.View.Interfaces.NewsFragments.ITopNews;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -31,15 +37,16 @@ import okhttp3.Response;
 /**
  * Created by guochen on 2017/02/27.
  */
-public class TopNewsFragment extends Fragment implements NetworkStateService.DoWhenDisconnected {
+public class TopNewsFragment extends Fragment implements NetworkStateService.DoWhenDisconnected,ITopNews{
     public static NetworkStateService.DoWhenDisconnected event;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ListView listView;
-
+    private TopNewsPresent present;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         event = this;
+        present = new TopNewsPresent(this);
     }
 
     @Nullable
@@ -48,41 +55,20 @@ public class TopNewsFragment extends Fragment implements NetworkStateService.DoW
         View view = inflater.inflate(R.layout.news_listview, null);
         swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipeRefreshLayout);
         listView = (ListView)view.findViewById(R.id.newsListView);
-        getDataFromApi();
+        present.showListViewData();
         return view;
-    }
-
-    private void getDataFromApi()
-    {
-        OkHttpClient mOkHttpClient = new OkHttpClient();
-        Request request = new Request.Builder().url("http://v.juhe.cn/toutiao/index?type=top&key=b69cc2e92edc5b582eba0a94c51173c8").build();
-        Call call = mOkHttpClient.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String jsonStr = response.body().string();
-                Gson gson = new Gson();
-                final NewsJson newsJson = gson.fromJson(jsonStr,NewsJson.class);
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        NewsListAdapter adapter = new NewsListAdapter(getContext(),newsJson.getResult().getData());
-                        listView.setAdapter(adapter);
-                    }
-                });
-            }
-        });
     }
 
     @Override
     public void doChange(boolean networkValid) {
         if(networkValid){
-            getDataFromApi();
+            present.showListViewData();
         }
+    }
+
+    @Override
+    public void showListViewContent(List<News> newsList) {
+        NewsListAdapter adapter = new NewsListAdapter(getContext(),newsList);
+        listView.setAdapter(adapter);
     }
 }
