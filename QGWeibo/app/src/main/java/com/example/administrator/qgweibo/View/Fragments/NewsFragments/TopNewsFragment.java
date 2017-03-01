@@ -1,5 +1,7 @@
 package com.example.administrator.qgweibo.View.Fragments.NewsFragments;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.administrator.qgweibo.Adapter.NewsListAdapter;
@@ -26,6 +29,7 @@ public class TopNewsFragment extends Fragment implements NetworkStateService.DoW
     private SwipeRefreshLayout swipeRefreshLayout;
     private ListView listView;
     private TopNewsPresenter presenter;
+    private List<News> newses;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +44,12 @@ public class TopNewsFragment extends Fragment implements NetworkStateService.DoW
         swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipeRefreshLayout);
         listView = (ListView)view.findViewById(R.id.newsListView);
         presenter.showListViewData();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                openNewsContent(newses.get(i).getUrl());
+            }
+        });
         return view;
     }
 
@@ -55,10 +65,17 @@ public class TopNewsFragment extends Fragment implements NetworkStateService.DoW
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                newses = newsList;
                 NewsListAdapter adapter = new NewsListAdapter(getContext(),newsList);
                 listView.setAdapter(adapter);
             }
         });
 
+    }
+
+    private void openNewsContent(String url){
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
+        startActivity(intent);
     }
 }
