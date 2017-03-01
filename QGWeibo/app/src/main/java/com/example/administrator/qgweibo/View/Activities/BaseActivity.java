@@ -22,6 +22,7 @@ public class BaseActivity extends AppCompatActivity implements NetworkStateServi
         event = BaseActivity.this;
         Intent intent = new Intent();
         intent.setAction(Consts.NETWORKSTATE_SERVICE);
+        intent.setPackage(getPackageName());
         startService(intent);
     }
 

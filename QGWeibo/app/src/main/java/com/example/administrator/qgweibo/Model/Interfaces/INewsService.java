@@ -2,7 +2,10 @@ package com.example.administrator.qgweibo.Model.Interfaces;
 
 import com.example.administrator.qgweibo.Model.Entities.News;
 
+import java.io.IOException;
 import java.util.List;
+
+import okhttp3.Callback;
 
 /**
  * Created by guochen on 2017/02/28.
@@ -10,14 +13,9 @@ import java.util.List;
 public interface INewsService {
 
     /**
-     * ?—pApi
-     * @param url V?api“Iurl
+     * ?ï¿½pApi
+     * @param url ï¿½V?apiï¿½Iurl
      */
-    public void getDataFromApi(String url);
+    public void getDataFromApi(String url, Callback callback);
 
-    /**
-     * ?æV?”˜
-     * @return V?”˜—ñ•\
-     */
-    public List<News> getNewsContents();
 }
