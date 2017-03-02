@@ -1,7 +1,5 @@
 package com.example.administrator.qgweibo.View.Fragments.NewsFragments;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,17 +19,20 @@ import com.example.administrator.qgweibo.Service.NetworkStateService;
 import com.example.administrator.qgweibo.Utils.UiUtils;
 import com.example.administrator.qgweibo.View.Interfaces.NewsFragments.INewsFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by guochen on 2017/02/27.
+ * Created by guochen on 2017/03/02.
  */
-public class TopNewsFragment extends Fragment implements NetworkStateService.DoWhenDisconnected,INewsFragment {
+public class SocialNewsFragment extends Fragment implements INewsFragment,NetworkStateService.DoWhenDisconnected {
     public static NetworkStateService.DoWhenDisconnected event;
+    private NewsPresenter presenter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ListView listView;
-    private NewsPresenter presenter;
-    private List<News> newses;
+    private View view;
+    private List<News> newses = new ArrayList<News>();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,52 +40,42 @@ public class TopNewsFragment extends Fragment implements NetworkStateService.DoW
         presenter = new NewsPresenter(this);
     }
 
+    @Override
+    public void doChange(boolean networkValid) {
+        if(true){
+            presenter = new NewsPresenter(this);
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.news_listview, null);
+        view = inflater.inflate(R.layout.news_listview,null);
         swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipeRefreshLayout);
         listView = (ListView)view.findViewById(R.id.newsListView);
-        presenter.showListViewData(Consts.TOP_NEWS_URL);
+        presenter.showListViewData(Consts.SOCIAL_NEWS_URL);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if(newses != null && newses.size() > 0){
-                    UiUtils.openNewsContent(newses.get(i).getUrl(),getContext());
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(newses.size() > 0){
+                    UiUtils.openNewsContent(newses.get(position).getUrl(),getContext());
                 }
             }
         });
         return view;
     }
 
-    /**
-     * DoSth when network changed
-     * @param networkValid  whether network is valid
-     */
-    @Override
-    public void doChange(boolean networkValid) {
-        if(networkValid){
-            presenter.showListViewData(Consts.TOP_NEWS_URL);
-        }
-    }
-
-
-    /**
-     * show the news in listview
-     * @param newsList 新?内容list
-     */
     @Override
     public void showListViewContent(final List<News> newsList) {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if (newsList != null && newsList.size() > 0) {
+                if(newsList != null && newsList.size() > 0){
                     newses = newsList;
-                    NewsListAdapter adapter = new NewsListAdapter(getContext(), newsList);
+                    NewsListAdapter adapter = new NewsListAdapter(getContext(),newsList);
                     listView.setAdapter(adapter);
                 }
             }
         });
-
     }
 }

@@ -1,7 +1,5 @@
 package com.example.administrator.qgweibo.View.Fragments.NewsFragments;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -26,7 +24,7 @@ import java.util.List;
 /**
  * Created by guochen on 2017/02/27.
  */
-public class TopNewsFragment extends Fragment implements NetworkStateService.DoWhenDisconnected,INewsFragment {
+public class MilitaryNewsFragment extends Fragment implements NetworkStateService.DoWhenDisconnected,INewsFragment {
     public static NetworkStateService.DoWhenDisconnected event;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ListView listView;
@@ -45,7 +43,7 @@ public class TopNewsFragment extends Fragment implements NetworkStateService.DoW
         View view = inflater.inflate(R.layout.news_listview, null);
         swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipeRefreshLayout);
         listView = (ListView)view.findViewById(R.id.newsListView);
-        presenter.showListViewData(Consts.TOP_NEWS_URL);
+        presenter.showListViewData(Consts.MILITARY_NEWS_URL);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

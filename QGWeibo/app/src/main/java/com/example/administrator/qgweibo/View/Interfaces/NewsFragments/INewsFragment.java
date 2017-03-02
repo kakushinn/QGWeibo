@@ -7,11 +7,11 @@ import java.util.List;
 /**
  * Created by guochen on 2017/02/28.
  */
-public interface ITopNews {
+public interface INewsFragment {
 
     /**
-     * ?示列表内容
-     * @param  newsList 新?内容list
+     * show news content
+     * @param  newsList  list for news
      */
     public void showListViewContent(List<News> newsList);
 }
