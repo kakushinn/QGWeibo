@@ -18,6 +18,7 @@ import com.example.administrator.qgweibo.R;
 import com.example.administrator.qgweibo.Service.NetworkStateService;
 import com.example.administrator.qgweibo.Utils.UiUtils;
 import com.example.administrator.qgweibo.View.Interfaces.NewsFragments.INewsFragment;
+import com.yalantis.phoenix.PullToRefreshView;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ import java.util.List;
  */
 public class FashionNewsFragment extends Fragment implements NetworkStateService.DoWhenDisconnected,INewsFragment {
     public static NetworkStateService.DoWhenDisconnected event;
-    private SwipeRefreshLayout swipeRefreshLayout;
+    private PullToRefreshView refreshView;
     private ListView listView;
     private NewsPresenter presenter;
     private List<News> newses;
@@ -41,7 +42,7 @@ public class FashionNewsFragment extends Fragment implements NetworkStateService
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.news_listview, null);
-        swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipeRefreshLayout);
+        refreshView = (PullToRefreshView) view.findViewById(R.id.pull_to_refresh);
         listView = (ListView)view.findViewById(R.id.newsListView);
         presenter.showListViewData(Consts.FASHION_NEWS_URL);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -50,6 +51,12 @@ public class FashionNewsFragment extends Fragment implements NetworkStateService
                 if(newses != null && newses.size() > 0){
                     UiUtils.openNewsContent(newses.get(i).getUrl(),getContext());
                 }
+            }
+        });
+        refreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener(){
+            @Override
+            public void onRefresh() {
+                presenter.showListViewData(Consts.TOP_NEWS_URL);
             }
         });
         return view;
@@ -80,6 +87,7 @@ public class FashionNewsFragment extends Fragment implements NetworkStateService
                     newses = newsList;
                     NewsListAdapter adapter = new NewsListAdapter(getContext(), newsList);
                     listView.setAdapter(adapter);
+                    refreshView.setRefreshing(false);
                 }
             }
         });
