@@ -30,10 +30,12 @@ public class NetworkStateService extends Service {
                 NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
                 if(networkInfo == null || !networkInfo.isConnected()){
                     DoWhenDisconnected event = BaseActivity.event;
-                    event.doChange(false);
+                    if(event != null)
+                        event.doChange(false);
                 }else{
                     DoWhenDisconnected event = TopNewsFragment.event;
-                    event.doChange(true);
+                    if(event != null)
+                        event.doChange(true);
                 }
             }
         }

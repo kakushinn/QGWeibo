@@ -31,6 +31,7 @@ public class BaseActivity extends AppCompatActivity implements NetworkStateServi
         super.onDestroy();
         Intent intent = new Intent();
         intent.setAction(Consts.NETWORKSTATE_SERVICE);
+        intent.setPackage(getPackageName());
         stopService(intent);
     }
 
