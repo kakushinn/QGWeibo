@@ -59,7 +59,7 @@ public class SocialNewsFragment extends Fragment implements INewsFragment,Networ
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(newses.size() > 0){
-                    UiUtils.openNewsContent(newses.get(position).getUrl(),getContext());
+                    UiUtils.INSTANCE.openNewsContent(newses.get(position).getUrl(),getContext());
                 }
             }
         });

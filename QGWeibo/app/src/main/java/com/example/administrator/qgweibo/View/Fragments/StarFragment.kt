@@ -1,5 +1,6 @@
 package com.example.administrator.qgweibo.View.Fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.widget.GridView
 import android.widget.Toast
 import com.example.administrator.qgweibo.Adapter.StarGridAdapter
 import com.example.administrator.qgweibo.R
+import com.example.administrator.qgweibo.View.Activities.StarDetailActivity
 import com.example.administrator.qgweibo.View.Interfaces.StarFragment.IStarFragment
 import kotlinx.android.synthetic.main.fragment_star.view.*
 
@@ -20,6 +22,8 @@ class StarFragment : Fragment(),IStarFragment {
 
     var gridview : GridView? = null
     var starGridAdapter : StarGridAdapter? = null
+    var starNameList  = ArrayList<String>();
+    var starDateSpanList = ArrayList<String>();
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +34,8 @@ class StarFragment : Fragment(),IStarFragment {
         initView(view)
         starGridAdapter = StarGridAdapter(activity)
         gridview!!.adapter = starGridAdapter
+        starNameList = starGridAdapter!!.getStarNames()
+        starDateSpanList = starGridAdapter!!.getStarDateSpan()
         return view
     }
 
@@ -37,9 +43,11 @@ class StarFragment : Fragment(),IStarFragment {
         gridview = view.gv_star as GridView
         gridview!!.setOnItemClickListener(object : AdapterView.OnItemClickListener{
             override fun onItemClick(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-                Toast.makeText(activity,"星座详情",Toast.LENGTH_LONG).show()
+                var intent = Intent(activity, StarDetailActivity :: class.java)
+                intent.putExtra("starName",starNameList[position])
+                intent.putExtra("starDateSpan",starDateSpanList[position])
+                activity.startActivity(intent)
             }
-
         })
     }
 }

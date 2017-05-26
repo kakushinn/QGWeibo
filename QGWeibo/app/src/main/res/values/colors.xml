@@ -9,4 +9,6 @@
     <color name="colorGray">#EEEEEE</color>
     <color name="colorRed">#FF0000</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorLightBlue">#89D6DC</color>
+    <color name="colorGrayText">#C0C0C0</color>
 </resources>

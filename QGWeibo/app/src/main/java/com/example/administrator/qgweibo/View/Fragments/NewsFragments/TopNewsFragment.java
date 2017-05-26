@@ -51,7 +51,7 @@ public class TopNewsFragment extends Fragment implements NetworkStateService.DoW
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if(newses != null && newses.size() > 0){
-                    UiUtils.openNewsContent(newses.get(i).getUrl(),getContext());
+                    UiUtils.INSTANCE.openNewsContent(newses.get(i).getUrl(),getContext());
                 }
             }
         });

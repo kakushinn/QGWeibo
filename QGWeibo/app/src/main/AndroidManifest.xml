@@ -26,8 +26,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".Adapter.MainActivity" />
-        <activity android:name=".View.Activities.NewsWebViewActivity"></activity>
+        <activity android:name=".View.Activities.NewsWebViewActivity" />
+        <activity android:name=".View.Activities.StarDetailActivity"></activity>
     </application>
 
 </manifest>

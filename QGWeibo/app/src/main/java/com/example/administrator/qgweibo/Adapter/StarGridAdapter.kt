@@ -72,6 +72,14 @@ class StarGridAdapter(private val mContext : Context) : BaseAdapter() {
         starIconList.add(R.mipmap.icon_sx_32)
     }
 
+    fun getStarNames() :  ArrayList<String>{
+        return starNameList;
+    }
+
+    fun getStarDateSpan() : ArrayList<String> {
+        return starTimeSpanList
+    }
+
     override fun getCount(): Int {
         return starIconList.size
     }
