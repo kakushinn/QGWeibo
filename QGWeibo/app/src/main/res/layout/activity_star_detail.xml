@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.administrator.qgweibo.View.CustomViews.VerticalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:background="@color/commonWhite">
     <LinearLayout
         android:orientation="vertical"
@@ -103,5 +104,19 @@
                 android:layout_height="wrap_content"
                 android:text="天秤档案"/>
         </RadioGroup>
+        <com.danxx.tabstrip.FlymeTabStrip
+            android:id="@+id/star_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            custom:indicatorHeight="3dp"
+            custom:indicatorColor="@android:color/holo_red_light"
+            custom:indicatorMargin="20dp"
+            custom:indicatorTextSize="15sp"
+            custom:selectedIndicatorTextSize="15sp"
+            custom:indicatorTextColor="@android:color/black"/>
+        <com.example.administrator.qgweibo.View.CustomViews.CustomViewPager
+            android:id="@+id/star_luck"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </LinearLayout>
-</ScrollView>
+</com.example.administrator.qgweibo.View.CustomViews.VerticalScrollView>
